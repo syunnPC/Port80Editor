@@ -1,0 +1,62 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Port80
+ClassGuid   = {724c96c9-e532-4ed1-a3fc-a8554f2661aa}
+Provider    = %ProviderName%
+CatalogFile = Port80Editor.cat
+DriverVer   = 01/10/2026,1.0.0.0
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,,
+
+[SourceDisksFiles]
+Port80Editor.sys = 1
+
+[Manufacturer]
+%MfgName% = Models,NTamd64
+
+[Models.NTamd64]
+%Port80.DeviceDesc% = Port80_Install, root\PORT80
+
+[Port80_Install.NT]
+CopyFiles = @Port80Editor.sys
+
+[Port80_Install.NT.HW]
+AddReg = Port80_HW_AddReg
+
+[Port80_HW_AddReg]
+HKR,,Security,, "D:P(A;;GA;;;SY)(A;;GA;;;BA)"
+
+[Port80_Install.NT.Services]
+AddService = Port80Editor, 0x00000002, Port80_Service_Install
+
+[Port80_Service_Install]
+DisplayName    = %Port80.SvcDesc%
+ServiceType    = 1 
+StartType      = 3  
+ErrorControl   = 1
+ServiceBinary  = %12%\Port80Editor.sys
+
+[Port80_Install.NT.Wdf]
+KmdfService = Port80Editor, Port80_Wdf
+
+[Port80_Wdf]
+KmdfLibraryVersion = 1.33
+
+[ClassInstall32]
+AddReg = Port80_ClassReg
+
+[Port80_ClassReg]
+HKR,,, %Port80.ClassName%
+
+[Strings]
+ProviderName      = "syunnpc"
+MfgName           = "syunnpc"
+DiskName          = "Port80 Driver Install Media"
+
+Port80.ClassName  = "PORT80 Debug Devices"
+Port80.DeviceDesc = "Port80 Root Device"
+Port80.SvcDesc    = "Port80 Port 80h Writer Driver"
