@@ -40,9 +40,6 @@ NTSTATUS Port80EvtDeviceAdd(_In_ WDFDRIVER Driver, _Inout_ PWDFDEVICE_INIT Devic
 	WDFQUEUE queue;
 	UNICODE_STRING devName, symLink, sddl;
 
-	//WdfDeviceInitSetSynchronizationScope(DeviceInit, WdfSynchronizationScopeNone);
-	//WdfDeviceInitSetExecutionLevel(DeviceInit, WdfExecutionLevelPassive);
-
 	RtlInitUnicodeString(&devName, DEVICE_NAME);
 	status = WdfDeviceInitAssignName(DeviceInit, &devName);
 
