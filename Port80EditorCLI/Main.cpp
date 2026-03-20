@@ -46,7 +46,7 @@ static bool ParseHexByte(const char* s, uint8_t& out)
 		input = input.substr(2, 2);
 	}
 
-	auto toValue = [&](char c) {for (int i = 0; i < 16; i++) { if (HEX_DIGITS[i] == c) { return i; } } return -241; }; //0xFGのような場合でもマイナスになるように0xF0(240)から1大きい数のマイナス
+	auto toValue = [&](char c) {for (int i = 0; i < 16; i++) { if (HEX_DIGITS[i] == c) { return i; } } return -241; }; //0xFG縺ｮ繧医≧縺ｪ蝣ｴ蜷医〒繧ゅ�槭う繝翫せ縺ｫ縺ｪ繧九ｈ縺�縺ｫ0xF0(240)縺九ｉ1螟ｧ縺阪＞謨ｰ縺ｮ繝槭う繝翫せ
 
 	int t = toValue(input[0]) * 16 + toValue(input[1]);
 
@@ -96,7 +96,6 @@ int main(int argc, char** argv)
 
 		if (!ok)
 		{
-
 			DWORD e = GetLastError();
 			std::println("DeviceIoControl failed. LastError = {}", e);
 			return 3;
